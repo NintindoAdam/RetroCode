@@ -17,18 +17,10 @@
   body{
     font-family:var(--font); color:var(--ink); line-height:1.55;
     min-height:100vh; padding:0 16px 86px;
-    background:
-      radial-gradient(1200px 360px at 50% 120%, rgba(60,138,42,.0) 60%, rgba(60,138,42,.0) 61%),
-      linear-gradient(180deg,#4d86c6 0%,#73a6e0 26%,#9ec7ef 46%,#bfe0f4 56%,#8fbf6a 58%,#5da742 66%,#4f9a38 100%);
-    background-attachment:fixed;
+    background:#3F86D9;
   }
-  /* rolling Bliss hill */
-  body::before{
-    content:""; position:fixed; left:-5vw; right:-5vw; bottom:60px; height:42vh; z-index:-1;
-    background:linear-gradient(180deg,#86c267 0%,#5da742 40%,#4a9433 100%);
-    border-radius:60% 40% 0 0 / 100% 100% 0 0;
-    box-shadow:0 -2px 24px rgba(0,0,0,.12);
-  }
+  /* hand-drawn "Bliss-style" scene (original artwork, no copyrighted image) */
+  .bg{position:fixed; inset:0; width:100%; height:100%; z-index:-1; pointer-events:none; display:block}
 
   .wrap{max-width:900px;margin:0 auto;padding-top:48px}
 
@@ -132,6 +124,34 @@
 </style>
 </head>
 <body>
+  <svg class="bg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1E63C4"/><stop offset="42%" stop-color="#3F86D9"/>
+        <stop offset="72%" stop-color="#86BCE8"/><stop offset="100%" stop-color="#D2E8F8"/>
+      </linearGradient>
+      <linearGradient id="grass" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#93C84F"/><stop offset="32%" stop-color="#6FAE39"/>
+        <stop offset="70%" stop-color="#4F9430"/><stop offset="100%" stop-color="#3B7C24"/>
+      </linearGradient>
+      <radialGradient id="sun" cx="60%" cy="55%" r="58%">
+        <stop offset="0%" stop-color="#CDE88A" stop-opacity=".75"/><stop offset="100%" stop-color="#CDE88A" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+    </defs>
+    <rect width="1600" height="900" fill="url(#sky)"/>
+    <g fill="#ffffff" filter="url(#soft)">
+      <g opacity=".95" transform="translate(250,165)"><ellipse cx="0" cy="0" rx="120" ry="34"/><ellipse cx="90" cy="-18" rx="80" ry="40"/><ellipse cx="-90" cy="14" rx="70" ry="26"/><ellipse cx="40" cy="20" rx="110" ry="26"/></g>
+      <g opacity=".9" transform="translate(1180,135) scale(1.25)"><ellipse cx="0" cy="0" rx="120" ry="32"/><ellipse cx="110" cy="-14" rx="70" ry="34"/><ellipse cx="-100" cy="10" rx="64" ry="24"/><ellipse cx="30" cy="18" rx="120" ry="24"/></g>
+      <g opacity=".8" transform="translate(760,355) scale(.8)"><ellipse cx="0" cy="0" rx="120" ry="30"/><ellipse cx="90" cy="-16" rx="70" ry="34"/><ellipse cx="-80" cy="12" rx="60" ry="22"/></g>
+      <g opacity=".85" transform="translate(1390,415) scale(.7)"><ellipse cx="0" cy="0" rx="120" ry="30"/><ellipse cx="80" cy="-12" rx="64" ry="30"/><ellipse cx="-80" cy="10" rx="60" ry="22"/></g>
+      <g opacity=".7" transform="translate(120,425) scale(.65)"><ellipse cx="0" cy="0" rx="130" ry="28"/><ellipse cx="90" cy="-12" rx="60" ry="28"/></g>
+    </g>
+    <path d="M0 900 L0 690 C 260 612, 560 540, 950 600 C 1240 645, 1450 686, 1600 700 L1600 900 Z" fill="url(#grass)"/>
+    <path d="M0 690 C 260 612, 560 540, 950 600 C 1240 645, 1450 686, 1600 700" fill="none" stroke="#AEDC6E" stroke-width="9" opacity=".5" filter="url(#soft)"/>
+    <ellipse cx="980" cy="770" rx="920" ry="250" fill="url(#sun)"/>
+  </svg>
+
   <div class="wrap">
 
     <!-- HERO WINDOW -->
