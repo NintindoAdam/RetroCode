@@ -1,0 +1,84 @@
+name: Build RetroCode (Windows x64)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  APP_NAME: RetroCode
+  BINARY_NAME: retrocode
+  ORG_NAME: NintindoAdam
+  OS_NAME: windows
+  VSCODE_QUALITY: stable
+
+jobs:
+  windows:
+    runs-on: windows-2022
+    defaults:
+      run:
+        shell: bash
+    env:
+      VSCODE_ARCH: x64
+      SHOULD_BUILD: 'yes'
+      CI_BUILD: 'no'
+      SHOULD_BUILD_REH: 'no'
+      SHOULD_BUILD_REH_WEB: 'no'
+      SHOULD_BUILD_ZIP: 'yes'
+      SHOULD_BUILD_EXE_SYS: 'no'
+      SHOULD_BUILD_EXE_USR: 'yes'
+      SHOULD_BUILD_MSI: 'no'
+      SHOULD_BUILD_MSI_NOUP: 'no'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js (pinned by .nvmrc)
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Clone VS Code source (sets RELEASE_VERSION)
+        run: ./get_repo.sh
+
+      - name: Build RetroCode for Windows (applies XP patch + branding)
+        run: ./build.sh
+
+      - name: Package User Setup installer + zip (Inno Setup)
+        run: ./prepare_assets.sh
+
+      - name: Show produced assets
+        run: ls -la assets/ || true
+
+      - name: Rename to stable download filenames
+        run: |
+          mkdir -p out
+          cp assets/*UserSetup*x64*.exe "out/RetroCode-1.0.0-windows-x64-Setup.exe"
+          cp assets/*win32-x64*.zip      "out/RetroCode-1.0.0-windows-x64.zip"
+          ls -la out/
+
+      - name: Upload build artifacts (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retrocode-windows-x64
+          path: |
+            out/*
+            assets/*
+          retention-days: 7
+
+      - name: Attach installer to the v1.0.0 release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload v1.0.0 \
+            "out/RetroCode-1.0.0-windows-x64-Setup.exe" \
+            "out/RetroCode-1.0.0-windows-x64.zip" \
+            --clobber --repo "${{ github.repository }}"

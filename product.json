@@ -646,5 +646,17 @@
   "applicationName": "retrocode",
   "dataFolderName": ".retrocode",
   "darwinBundleIdentifier": "com.adammarkocki.retrocode",
-  "urlProtocol": "retrocode"
+  "urlProtocol": "retrocode",
+  "win32DirName": "RetroCode",
+  "win32NameVersion": "RetroCode",
+  "win32RegValueName": "RetroCode",
+  "win32ShellNameShort": "RetroCode",
+  "win32MutexName": "retrocode",
+  "win32AppUserModelId": "RetroCode.RetroCode",
+  "win32AppId": "{{D1E1511B-BBAD-4E90-82FC-BECD75622477}",
+  "win32x64AppId": "{{106F56FD-D2CB-45BE-A0C9-BC55C45D95EE}",
+  "win32arm64AppId": "{{F522290B-AA72-42E9-A35E-1A816A40D611}",
+  "win32UserAppId": "{{EF09D7DD-AD1B-493C-A46E-33DE63197BB6}",
+  "win32x64UserAppId": "{{2A103FF1-7D51-41A0-94E8-5F5A07EB2BF5}",
+  "win32arm64UserAppId": "{{F4259CDD-F956-4D6C-979E-9DD51D0613E4}"
 }
