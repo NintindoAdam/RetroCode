@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RetroCode: Visual Studio Code in Windows XP Luna</title>
+<meta name="description" content="RetroCode is a free, open-source code editor: the full power of VS Code wearing the Windows XP 'Luna' look. Signed, notarized, and ready for macOS." />
+<style>
+  :root{
+    --luna-top:#5B8FD6; --luna:#3A6EA5; --luna-deep:#235A9C; --deep:#1C3E72;
+    --beige:#ECE9D8; --beige-lt:#F5F3EA; --beige-bd:#ACA899;
+    --green-top:#7BC24A; --green:#5DA742; --green-bot:#3C8A2A;
+    --ink:#1A1A1A; --font:Tahoma,"Segoe UI","Noto Sans",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--font); color:var(--ink); line-height:1.55;
+    min-height:100vh; padding:0 16px 86px;
+    background:
+      radial-gradient(1200px 360px at 50% 120%, rgba(60,138,42,.0) 60%, rgba(60,138,42,.0) 61%),
+      linear-gradient(180deg,#4d86c6 0%,#73a6e0 26%,#9ec7ef 46%,#bfe0f4 56%,#8fbf6a 58%,#5da742 66%,#4f9a38 100%);
+    background-attachment:fixed;
+  }
+  /* rolling Bliss hill */
+  body::before{
+    content:""; position:fixed; left:-5vw; right:-5vw; bottom:60px; height:42vh; z-index:-1;
+    background:linear-gradient(180deg,#86c267 0%,#5da742 40%,#4a9433 100%);
+    border-radius:60% 40% 0 0 / 100% 100% 0 0;
+    box-shadow:0 -2px 24px rgba(0,0,0,.12);
+  }
+
+  .wrap{max-width:900px;margin:0 auto;padding-top:48px}
+
+  /* ---- XP window chrome ---- */
+  .win{
+    background:var(--beige-lt);
+    border:1px solid var(--deep);
+    border-radius:9px 9px 6px 6px;
+    box-shadow:0 14px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.5);
+    overflow:hidden; margin:0 auto 28px;
+  }
+  .titlebar{
+    position:relative; display:flex; align-items:center; gap:8px;
+    padding:6px 8px 7px;
+    background:linear-gradient(180deg,#6BA0E8 0%,#5B8FD6 12%,#3A6EA5 60%,#235A9C 100%);
+    border-bottom:1px solid var(--deep);
+    color:#fff; font-weight:700; text-shadow:0 1px 1px rgba(0,0,0,.45);
+  }
+  .titlebar::before{content:"";position:absolute;left:0;right:0;top:0;height:48%;
+    background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,.04));pointer-events:none}
+  .titlebar .tt{flex:1;font-size:14px;letter-spacing:.2px}
+  .ctrls{display:flex;gap:4px}
+  .ctrls i{width:21px;height:20px;border-radius:4px;border:1px solid rgba(255,255,255,.7);
+    display:grid;place-items:center;font-style:normal;font-size:11px;color:#0b2a55;font-weight:700;
+    background:linear-gradient(180deg,#dcebfb,#9fbfe6)}
+  .ctrls i.x{background:linear-gradient(180deg,#f7a98f,#d9533b);color:#fff;border-color:#8e2f1e}
+  .body{padding:30px 34px 34px}
+
+  /* ---- hero ---- */
+  .hero{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+  .hero .ico{flex:0 0 auto}
+  .hero h1{font-size:42px;margin:0 0 6px;letter-spacing:-.5px}
+  .hero .tag{font-size:18px;color:#2b3a4d;margin:0 0 14px;font-weight:700}
+  .hero p{margin:0 0 20px;max-width:48ch;color:#33414f}
+
+  .cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .btn{
+    appearance:none;cursor:pointer;text-decoration:none;display:inline-flex;flex-direction:column;
+    align-items:center;line-height:1.15;padding:11px 26px;border-radius:7px;font-family:var(--font);
+    color:#0c3d12;font-weight:700;font-size:17px;border:1px solid #2f6b22;
+    background:linear-gradient(180deg,#a6e07f 0%,#7BC24A 18%,#5DA742 60%,#3C8A2A 100%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 2px 5px rgba(0,0,0,.25);
+    text-shadow:0 1px 0 rgba(255,255,255,.35);
+  }
+  .btn small{font-weight:400;font-size:12px;color:#0e4715;opacity:.9;margin-top:3px}
+  .btn:hover{filter:brightness(1.05)}
+  .btn:active{background:linear-gradient(180deg,#3C8A2A,#5DA742);box-shadow:inset 0 2px 4px rgba(0,0,0,.3)}
+  .ghost{color:var(--luna-deep);font-weight:700;text-decoration:none;font-size:14px}
+  .ghost:hover{text-decoration:underline}
+
+  /* ---- feature list ---- */
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px}
+  .feat div{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:#2b3a4d}
+  .feat b{display:block;color:var(--ink)}
+  .chk{flex:0 0 auto;width:18px;height:18px;border-radius:50%;background:linear-gradient(180deg,#7BC24A,#3C8A2A);
+    display:grid;place-items:center;color:#fff;font-size:11px;margin-top:2px;box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+
+  /* ---- faux editor screenshot ---- */
+  .shot{border:1px solid var(--deep);border-radius:7px;overflow:hidden;background:#fff;font-size:12.5px}
+  .shot .tb{display:flex;align-items:center;gap:8px;padding:5px 8px;color:#fff;font-weight:700;
+    background:linear-gradient(180deg,#6BA0E8,#3A6EA5 60%,#235A9C);border-bottom:1px solid var(--deep);text-shadow:0 1px 1px rgba(0,0,0,.4)}
+  .shot .row{display:flex;min-height:188px}
+  .shot .side{width:188px;background:var(--beige);border-right:1px solid var(--beige-bd);padding:0}
+  .shot .ph{background:linear-gradient(180deg,#5B8FD6,#3A6EA5);color:#fff;font-weight:700;
+    padding:4px 10px;border-bottom:1px solid var(--deep);text-shadow:0 1px 1px rgba(0,0,0,.3);font-size:11px;letter-spacing:.4px}
+  .shot .files{padding:6px 8px;color:#1C3E72}
+  .shot .files div{padding:2px 6px;border-radius:3px}
+  .shot .files .sel{background:#AECBF0}
+  .shot .ed{flex:1;background:#fff;padding:10px 14px;font-family:"SF Mono",Menlo,Consolas,monospace;color:#1A1A1A}
+  .shot .ed .ln{white-space:pre}
+  .kw{color:#7E3FAD}.st{color:#C0392B}.fn{color:#2A6FC0}.cm{color:#5F8A3A}.nm{color:#B5651D}
+  .shot .status{background:linear-gradient(180deg,#3A6EA5,#235A9C);color:#fff;padding:3px 10px;font-size:11px;border-top:1px solid var(--deep)}
+
+  .note{font-size:12.5px;color:#3a4a59;line-height:1.6}
+  .note a{color:var(--luna-deep)}
+  h2.sec{font-size:15px;margin:0 0 14px;color:var(--luna-deep);text-transform:uppercase;letter-spacing:.6px}
+
+  /* ---- taskbar ---- */
+  .taskbar{position:fixed;left:0;right:0;bottom:0;height:38px;z-index:10;display:flex;align-items:center;
+    background:linear-gradient(180deg,#3f8cf2 0%,#246ad6 9%,#1f60c9 88%,#1a52ad 100%);
+    border-top:1px solid #6fa8ef;box-shadow:0 -1px 0 #163e86}
+  .start{display:flex;align-items:center;gap:8px;height:100%;padding:0 22px 0 12px;font-style:italic;
+    font-weight:700;font-size:16px;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.4);
+    background:linear-gradient(180deg,#7BC24A 0%,#5DA742 45%,#3C8A2A 100%);
+    border-radius:0 12px 12px 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),2px 0 4px rgba(0,0,0,.25)}
+  .start .flag{width:18px;height:18px;border-radius:3px;background:
+    conic-gradient(from 0deg at 50% 50%,#e8453c 0 25%,#3ca33c 0 50%,#2f6bd6 0 75%,#f2c14e 0 100%);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
+  .tasks{display:flex;align-items:center;gap:6px;padding-left:8px;flex:1}
+  .task{display:flex;align-items:center;gap:7px;height:26px;padding:0 12px;color:#fff;font-size:12.5px;font-weight:700;
+    background:linear-gradient(180deg,#4a93f0,#2f74da);border:1px solid #1a52ad;border-radius:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+  .task .d{width:14px;height:14px;border-radius:3px;background:linear-gradient(180deg,#6BA0E8,#235A9C);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+  .tray{display:flex;align-items:center;gap:10px;height:100%;padding:0 16px;color:#fff;font-size:12.5px;
+    background:linear-gradient(180deg,#1f8ad6,#1466bd);border-left:1px solid #6fa8ef;box-shadow:inset 1px 0 0 #15539f}
+  #clock{font-variant-numeric:tabular-nums}
+
+  @media(max-width:640px){
+    .hero h1{font-size:34px}.feat{grid-template-columns:1fr}.body{padding:22px}
+    .shot .side{width:130px}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- HERO WINDOW -->
+    <section class="win">
+      <div class="titlebar">
+        <span class="tt">RetroCode</span>
+        <span class="ctrls"><i>_</i><i>▢</i><i class="x">✕</i></span>
+      </div>
+      <div class="body">
+        <div class="hero">
+          <div class="ico" aria-hidden="true">
+            <!-- RetroCode icon -->
+            <svg width="104" height="104" viewBox="0 0 1024 1024" role="img" aria-label="RetroCode icon">
+              <defs>
+                <linearGradient id="lu" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#6BA0E8"/><stop offset="14%" stop-color="#5B8FD6"/>
+                  <stop offset="55%" stop-color="#3A6EA5"/><stop offset="100%" stop-color="#235A9C"/></linearGradient>
+                <linearGradient id="gl" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#fff" stop-opacity=".6"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient>
+                <linearGradient id="tbg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#5B8FD6"/><stop offset="100%" stop-color="#235A9C"/></linearGradient>
+                <clipPath id="w"><rect x="284" y="312" width="456" height="400" rx="30"/></clipPath>
+              </defs>
+              <rect x="96" y="96" width="832" height="832" rx="188" fill="url(#lu)" stroke="#1C3E72" stroke-width="12"/>
+              <rect x="150" y="150" width="724" height="372" rx="150" fill="url(#gl)"/>
+              <g clip-path="url(#w)">
+                <rect x="284" y="312" width="456" height="400" fill="#fff"/>
+                <rect x="284" y="312" width="456" height="96" fill="url(#tbg)"/>
+                <circle cx="616" cy="360" r="18" fill="#5DA742" stroke="#2F6B22" stroke-width="3"/>
+                <circle cx="664" cy="360" r="18" fill="#F2C14E" stroke="#9A7B1E" stroke-width="3"/>
+                <circle cx="700" cy="360" r="18" fill="#D9533B" stroke="#8E2F1E" stroke-width="3"/>
+                <rect x="324" y="452" width="220" height="20" rx="10" fill="#7E3FAD"/>
+                <rect x="324" y="500" width="320" height="20" rx="10" fill="#ACA899"/>
+                <rect x="364" y="548" width="260" height="20" rx="10" fill="#2A6FC0"/>
+                <rect x="364" y="596" width="180" height="20" rx="10" fill="#C0392B"/>
+                <rect x="324" y="644" width="240" height="20" rx="10" fill="#5F8A3A"/>
+              </g>
+              <rect x="284" y="312" width="456" height="400" rx="30" fill="none" stroke="#1C3E72" stroke-width="9"/>
+            </svg>
+          </div>
+          <div style="flex:1;min-width:260px">
+            <h1>RetroCode</h1>
+            <p class="tag">Visual Studio Code, dressed in Windows&nbsp;XP “Luna”.</p>
+            <p>A genuine, fully-working code editor with the soul of 2001. RetroCode is a fork of
+               VSCodium with the classic XP blue chrome, glossy tabs, and Tahoma type baked right
+               in. No extensions, no settings to tweak. Open it and you’re home.</p>
+            <div class="cta">
+              <a class="btn" href="https://github.com/NintindoAdam/RetroCode/releases/latest/download/RetroCode-1.0.0-arm64.dmg">
+                Download for Mac
+                <small>macOS · Apple Silicon · signed &amp; notarized · 223&nbsp;MB</small>
+              </a>
+              <a class="ghost" href="https://github.com/NintindoAdam/RetroCode">View source on GitHub →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENSHOT WINDOW -->
+    <section class="win">
+      <div class="titlebar"><span class="tt">RetroCode: a look inside</span>
+        <span class="ctrls"><i>_</i><i>▢</i><i class="x">✕</i></span></div>
+      <div class="body" style="padding:18px">
+        <div class="shot">
+          <div class="tb">RetroCode - main.js</div>
+          <div class="row">
+            <div class="side">
+              <div class="ph">EXPLORER</div>
+              <div class="files">
+                <div>📁 my-project</div>
+                <div class="sel">📄 main.js</div>
+                <div>📄 styles.css</div>
+                <div>📄 README.md</div>
+              </div>
+            </div>
+            <div class="ed">
+              <div class="ln"><span class="cm">// welcome back to 2001</span></div>
+              <div class="ln"><span class="kw">function</span> <span class="fn">greet</span>(name) {</div>
+              <div class="ln">  <span class="kw">const</span> msg = <span class="st">"Hello, "</span> + name;</div>
+              <div class="ln">  <span class="kw">return</span> msg.<span class="fn">repeat</span>(<span class="nm">2</span>);</div>
+              <div class="ln">}</div>
+              <div class="ln">&nbsp;</div>
+              <div class="ln"><span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">greet</span>(<span class="st">"world"</span>));</div>
+            </div>
+          </div>
+          <div class="status">▸ main  ⊘ 0  ⚠ 0      Ln 4, Col 22    Spaces: 2    UTF-8    JavaScript</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES WINDOW -->
+    <section class="win">
+      <div class="titlebar"><span class="tt">What you get</span>
+        <span class="ctrls"><i>_</i><i>▢</i><i class="x">✕</i></span></div>
+      <div class="body">
+        <h2 class="sec">Features</h2>
+        <div class="feat">
+          <div><span class="chk">✓</span><span><b>The full XP “Luna” look</b>Glossy blue title bar, beveled tabs, beige panels, Tahoma, on by default.</span></div>
+          <div><span class="chk">✓</span><span><b>A real editor underneath</b>It’s VSCodium / Code&nbsp;OSS: extensions, Git, terminal, debugging all work.</span></div>
+          <div><span class="chk">✓</span><span><b>Signed &amp; notarized</b>Installs like any Mac app, with no “unidentified developer” warnings.</span></div>
+          <div><span class="chk">✓</span><span><b>Free &amp; open source</b>MIT-licensed. No telemetry beyond the open-source base. Yours to fork.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / LEGAL WINDOW -->
+    <section class="win">
+      <div class="titlebar"><span class="tt">About</span>
+        <span class="ctrls"><i>_</i><i>▢</i><i class="x">✕</i></span></div>
+      <div class="body">
+        <p class="note">
+          RetroCode is built on <a href="https://vscodium.com">VSCodium</a> (the freely-licensed
+          <em>Code OSS</em> build of Visual Studio Code) and uses the open-source
+          <a href="https://open-vsx.org">Open VSX</a> extension registry.
+          <br><br>
+          RetroCode is an independent, fan-made project. It is <b>not affiliated with, endorsed by, or
+          sponsored by Microsoft</b>. “Visual Studio Code”, “Windows”, and “Windows XP” are trademarks of
+          Microsoft Corporation; RetroCode is a nostalgic tribute and claims no ownership of them.
+          <br><br>
+          © 2026 Adam Markocki · Theme &amp; packaging MIT-licensed · Upstream components under their own licenses.
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- XP TASKBAR -->
+  <div class="taskbar">
+    <div class="start"><span class="flag"></span>start</div>
+    <div class="tasks">
+      <div class="task"><span class="d"></span>RetroCode</div>
+    </div>
+    <div class="tray"><span id="clock">12:00&nbsp;PM</span></div>
+  </div>
+
+  <script>
+    (function(){
+      function tick(){
+        var d=new Date(), h=d.getHours(), m=d.getMinutes();
+        var ap=h>=12?'PM':'AM'; h=h%12||12;
+        document.getElementById('clock').textContent=h+':'+(m<10?'0':'')+m+' '+ap;
+      }
+      tick(); setInterval(tick,15000);
+    })();
+  </script>
+</body>
+</html>

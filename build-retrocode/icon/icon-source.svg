@@ -1,0 +1,41 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="luna" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6BA0E8"/>
+      <stop offset="14%" stop-color="#5B8FD6"/>
+      <stop offset="55%" stop-color="#3A6EA5"/>
+      <stop offset="100%" stop-color="#235A9C"/>
+    </linearGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.60"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="titlebar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5B8FD6"/>
+      <stop offset="100%" stop-color="#235A9C"/>
+    </linearGradient>
+    <clipPath id="win"><rect x="284" y="312" width="456" height="400" rx="30"/></clipPath>
+  </defs>
+
+  <!-- Luna tile -->
+  <rect x="96" y="96" width="832" height="832" rx="188" fill="url(#luna)" stroke="#1C3E72" stroke-width="12"/>
+  <rect x="150" y="150" width="724" height="372" rx="150" fill="url(#gloss)"/>
+
+  <!-- Retro window -->
+  <g clip-path="url(#win)">
+    <rect x="284" y="312" width="456" height="400" fill="#FFFFFF"/>
+    <rect x="284" y="312" width="456" height="96" fill="url(#titlebar)"/>
+    <rect x="284" y="312" width="456" height="46" fill="#ffffff" opacity="0.18"/>
+    <!-- XP-style window buttons -->
+    <circle cx="616" cy="360" r="18" fill="#5DA742" stroke="#2F6B22" stroke-width="3"/>
+    <circle cx="664" cy="360" r="18" fill="#F2C14E" stroke="#9A7B1E" stroke-width="3"/>
+    <circle cx="700" cy="360" r="18" fill="#D9533B" stroke="#8E2F1E" stroke-width="3"/>
+    <!-- code lines -->
+    <rect x="324" y="452" width="220" height="20" rx="10" fill="#7E3FAD"/>
+    <rect x="324" y="500" width="320" height="20" rx="10" fill="#ACA899"/>
+    <rect x="364" y="548" width="260" height="20" rx="10" fill="#2A6FC0"/>
+    <rect x="364" y="596" width="180" height="20" rx="10" fill="#C0392B"/>
+    <rect x="324" y="644" width="240" height="20" rx="10" fill="#5F8A3A"/>
+  </g>
+  <rect x="284" y="312" width="456" height="400" rx="30" fill="none" stroke="#1C3E72" stroke-width="9"/>
+</svg>

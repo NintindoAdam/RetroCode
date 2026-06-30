@@ -1,0 +1,260 @@
+diff --git a/extensions/retrocode-theme/package.json b/extensions/retrocode-theme/package.json
+new file mode 100644
+index 00000000..9a33c44c
+--- /dev/null
++++ b/extensions/retrocode-theme/package.json
+@@ -0,0 +1,28 @@
++{
++  "name": "retrocode-theme",
++  "displayName": "RetroCode XP Luna",
++  "description": "Windows XP \"Luna\" color theme, bundled as the RetroCode default.",
++  "version": "1.0.0",
++  "publisher": "retrocode",
++  "license": "MIT",
++  "engines": {
++    "vscode": "*"
++  },
++  "categories": [
++    "Themes"
++  ],
++  "contributes": {
++    "themes": [
++      {
++        "id": "RetroCode XP Luna",
++        "label": "RetroCode XP Luna",
++        "uiTheme": "vs",
++        "path": "./themes/retrocode-xp-luna-color-theme.json"
++      }
++    ],
++    "configurationDefaults": {
++      "workbench.colorTheme": "RetroCode XP Luna",
++      "window.titleBarStyle": "custom"
++    }
++  }
++}
+diff --git a/extensions/retrocode-theme/themes/retrocode-xp-luna-color-theme.json b/extensions/retrocode-theme/themes/retrocode-xp-luna-color-theme.json
+new file mode 100644
+index 00000000..a9b41b24
+--- /dev/null
++++ b/extensions/retrocode-theme/themes/retrocode-xp-luna-color-theme.json
+@@ -0,0 +1,122 @@
++{
++  "$schema": "vscode://schemas/color-theme",
++  "name": "RetroCode XP Luna",
++  "type": "light",
++  "colors": {
++    "titleBar.activeBackground": "#235A9C",
++    "titleBar.activeForeground": "#FFFFFF",
++    "titleBar.inactiveBackground": "#3A6EA5",
++    "titleBar.inactiveForeground": "#D8E4F2",
++    "titleBar.border": "#1C3E72",
++
++    "activityBar.background": "#3A6EA5",
++    "activityBar.foreground": "#FFFFFF",
++    "activityBar.inactiveForeground": "#C2D4EA",
++    "activityBar.activeBorder": "#5DA742",
++    "activityBar.border": "#1C3E72",
++    "activityBarBadge.background": "#5DA742",
++    "activityBarBadge.foreground": "#FFFFFF",
++
++    "sideBar.background": "#ECE9D8",
++    "sideBar.foreground": "#1C3E72",
++    "sideBar.border": "#ACA899",
++    "sideBarTitle.foreground": "#1C3E72",
++    "sideBarSectionHeader.background": "#3A6EA5",
++    "sideBarSectionHeader.foreground": "#FFFFFF",
++    "sideBarSectionHeader.border": "#1C3E72",
++
++    "list.activeSelectionBackground": "#AECBF0",
++    "list.activeSelectionForeground": "#1C3E72",
++    "list.inactiveSelectionBackground": "#D6E2F2",
++    "list.hoverBackground": "#DCE6F4",
++    "list.focusBackground": "#AECBF0",
++
++    "editor.background": "#FFFFFF",
++    "editor.foreground": "#1A1A1A",
++    "editor.lineHighlightBackground": "#F0F4FA",
++    "editor.selectionBackground": "#AECBF0",
++    "editorLineNumber.foreground": "#8A8A8A",
++    "editorLineNumber.activeForeground": "#235A9C",
++    "editorCursor.foreground": "#1C3E72",
++
++    "editorGroupHeader.tabsBackground": "#ECE9D8",
++    "editorGroupHeader.border": "#ACA899",
++    "tab.activeBackground": "#5B8FD6",
++    "tab.activeForeground": "#FFFFFF",
++    "tab.inactiveBackground": "#F5F3EA",
++    "tab.inactiveForeground": "#3A3A2A",
++    "tab.border": "#ACA899",
++    "tab.activeBorderTop": "#5DA742",
++    "tab.hoverBackground": "#DCE6F4",
++
++    "statusBar.background": "#235A9C",
++    "statusBar.foreground": "#FFFFFF",
++    "statusBar.border": "#1C3E72",
++    "statusBar.noFolderBackground": "#3A6EA5",
++    "statusBarItem.hoverBackground": "#3A6EA5",
++    "statusBarItem.remoteBackground": "#5DA742",
++    "statusBarItem.remoteForeground": "#FFFFFF",
++
++    "menubar.selectionBackground": "#AECBF0",
++    "menubar.selectionForeground": "#1C3E72",
++    "menu.background": "#F5F3EA",
++    "menu.foreground": "#1C3E72",
++    "menu.selectionBackground": "#3A6EA5",
++    "menu.selectionForeground": "#FFFFFF",
++    "menu.border": "#ACA899",
++
++    "button.background": "#3A6EA5",
++    "button.foreground": "#FFFFFF",
++    "button.hoverBackground": "#5B8FD6",
++    "input.background": "#FFFFFF",
++    "input.foreground": "#1A1A1A",
++    "input.border": "#ACA899",
++    "focusBorder": "#5B8FD6",
++
++    "panel.background": "#ECE9D8",
++    "panel.border": "#ACA899",
++    "panelTitle.activeForeground": "#1C3E72",
++    "panelTitle.activeBorder": "#5DA742",
++
++    "dropdown.background": "#FFFFFF",
++    "dropdown.foreground": "#1A1A1A",
++    "dropdown.border": "#ACA899",
++
++    "badge.background": "#5DA742",
++    "badge.foreground": "#FFFFFF",
++    "progressBar.background": "#5DA742",
++    "scrollbarSlider.background": "#3A6EA580",
++    "scrollbarSlider.hoverBackground": "#3A6EA5B0",
++    "scrollbarSlider.activeBackground": "#235A9C"
++  },
++  "tokenColors": [
++    {
++      "scope": ["comment", "punctuation.definition.comment"],
++      "settings": { "foreground": "#5F8A3A", "fontStyle": "italic" }
++    },
++    {
++      "scope": ["keyword", "keyword.control", "storage", "storage.type", "storage.modifier"],
++      "settings": { "foreground": "#7E3FAD" }
++    },
++    {
++      "scope": ["string", "string.quoted", "punctuation.definition.string", "constant.character"],
++      "settings": { "foreground": "#C0392B" }
++    },
++    {
++      "scope": ["constant.numeric", "constant.language", "constant.language.boolean"],
++      "settings": { "foreground": "#B5651D" }
++    },
++    {
++      "scope": ["entity.name.type", "support.type", "entity.name.class", "support.class", "entity.other.inherited-class"],
++      "settings": { "foreground": "#1A7A3A" }
++    },
++    {
++      "scope": ["entity.name.function", "support.function", "meta.function-call.generic"],
++      "settings": { "foreground": "#2A6FC0" }
++    },
++    {
++      "scope": ["variable", "variable.other", "meta.definition.variable", "variable.parameter"],
++      "settings": { "foreground": "#1A1A1A" }
++    }
++  ]
++}
+diff --git a/src/vs/code/electron-browser/workbench/workbench.html b/src/vs/code/electron-browser/workbench/workbench.html
+index ce51984c..79df0ca9 100644
+--- a/src/vs/code/electron-browser/workbench/workbench.html
++++ b/src/vs/code/electron-browser/workbench/workbench.html
+@@ -69,6 +69,93 @@
+ 
+ 		<!-- Workbench CSS -->
+ 		<link rel="stylesheet" href="../../../workbench/workbench.desktop.main.css">
++
++		<!-- RetroCode XP "Luna" chrome (baked in; was Phase 1 xp-theme.css) -->
++		<style id="retrocode-xp-luna">
++/* Global chrome font: Tahoma (XP system font), Segoe fallback. Does NOT touch the editor font. */
++.monaco-workbench { --xp-font: Tahoma, "Segoe UI", "Noto Sans", sans-serif; }
++.monaco-workbench .part.titlebar,
++.monaco-workbench .part.activitybar,
++.monaco-workbench .part.sidebar,
++.monaco-workbench .part.panel,
++.monaco-workbench .part.statusbar,
++.monaco-workbench .tabs-container,
++.monaco-workbench .monaco-menu,
++.monaco-workbench .menubar {
++  font-family: var(--xp-font) !important;
++  letter-spacing: 0.1px;
++}
++/* TITLE BAR — brighter Luna blue gradient, glossy top, painted on part + inner container */
++.monaco-workbench .part.titlebar,
++.monaco-workbench .part.titlebar > .titlebar-container {
++  background: linear-gradient(180deg, #6BA0E8 0%, #5B8FD6 14%, #4A7FC6 50%, #3A6EA5 82%, #235A9C 100%) !important;
++  border-bottom: 1px solid #1C3E72 !important;
++  position: relative;
++}
++.monaco-workbench .part.titlebar { border-top-left-radius: 7px; border-top-right-radius: 7px; }
++.monaco-workbench .part.titlebar > .titlebar-container::before {
++  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 48%;
++  background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.05));
++  pointer-events: none; z-index: 0;
++}
++.monaco-workbench .part.titlebar .window-title,
++.monaco-workbench .part.titlebar .monaco-toolbar,
++.monaco-workbench .part.titlebar .action-label {
++  color: #FFFFFF !important; text-shadow: 0 1px 1px rgba(0,0,0,0.45);
++}
++.monaco-workbench .part.titlebar .window-title { font-weight: 500; }
++/* MENU BAR */
++.monaco-workbench .menubar > .menubar-menu-button { color: #1C3E72 !important; border-radius: 3px; }
++.monaco-workbench .menubar > .menubar-menu-button:hover,
++.monaco-workbench .menubar > .menubar-menu-button.open { background: #AECBF0 !important; color: #1C3E72 !important; }
++/* SIDEBAR SECTION HEADERS — classic blue gradient bar, white text */
++.monaco-workbench .pane-header {
++  background: linear-gradient(180deg, #5B8FD6, #3A6EA5) !important;
++  border-bottom: 1px solid #1C3E72 !important;
++}
++.monaco-workbench .pane-header .title { color: #FFFFFF !important; font-weight: 500; text-shadow: 0 1px 1px rgba(0,0,0,0.30); }
++/* TABS — beveled; active = Luna blue + green top accent; inactive = beige */
++.monaco-workbench .tabs-container { background: #ECE9D8 !important; }
++.monaco-workbench .tab {
++  border: 1px solid #ACA899 !important; border-bottom: none !important;
++  border-top-left-radius: 5px; border-top-right-radius: 5px; margin: 2px 1px 0 1px;
++  background: linear-gradient(180deg, #FBFAF4, #ECE9D8) !important;
++}
++.monaco-workbench .tab.active {
++  background: linear-gradient(180deg, #7BA2DD, #4A78BD) !important;
++  border-color: #1C3E72 !important; box-shadow: inset 0 2px 0 #5DA742;
++}
++.monaco-workbench .tab.active .tab-label,
++.monaco-workbench .tab.active .monaco-icon-label,
++.monaco-workbench .tab.active .label-name { color: #FFFFFF !important; text-shadow: 0 1px 1px rgba(0,0,0,0.35); }
++.monaco-workbench .tab:not(.active):hover { background: linear-gradient(180deg, #FFFFFF, #DCE6F4) !important; }
++/* STATUS BAR — Luna blue gradient, white text */
++.monaco-workbench .part.statusbar {
++  background: linear-gradient(180deg, #3A6EA5, #235A9C) !important;
++  border-top: 1px solid #1C3E72 !important; color: #FFFFFF !important;
++}
++.monaco-workbench .part.statusbar .statusbar-item { color: #FFFFFF !important; }
++/* BUTTONS — glossy XP */
++.monaco-workbench .monaco-button,
++.monaco-workbench .monaco-text-button {
++  background: linear-gradient(180deg, #FBFCFE, #D4E1F3) !important;
++  color: #1C3E72 !important; border: 1px solid #5B8FD6 !important; border-radius: 4px !important;
++  box-shadow: inset 0 1px 0 #FFFFFF; font-family: var(--xp-font) !important; text-shadow: none !important;
++}
++.monaco-workbench .monaco-button:hover,
++.monaco-workbench .monaco-text-button:hover { background: linear-gradient(180deg, #FFFFFF, #C6D8F0) !important; border-color: #235A9C !important; }
++.monaco-workbench .monaco-button:active { background: linear-gradient(180deg, #C6D8F0, #FFFFFF) !important; }
++/* INPUTS / DROPDOWNS — inset, beige border */
++.monaco-workbench .monaco-inputbox,
++.monaco-workbench .monaco-findInput,
++.monaco-workbench select {
++  border: 1px solid #ACA899 !important; border-radius: 3px !important;
++  box-shadow: inset 0 1px 2px rgba(0,0,0,0.12); font-family: var(--xp-font) !important;
++}
++/* SCROLLBARS — XP-blue slider */
++.monaco-workbench .monaco-scrollable-element > .scrollbar > .slider { background: rgba(58,110,165,0.55) !important; border-radius: 4px; }
++.monaco-workbench .monaco-scrollable-element > .scrollbar > .slider:hover { background: rgba(35,90,156,0.80) !important; }
++		</style>
+ 	</head>
+ 
+ 	<body aria-label="">
