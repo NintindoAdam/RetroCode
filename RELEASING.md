@@ -58,3 +58,12 @@ cp website/index.html index.html   # if the page changed
 git commit -am "site: update download" && git push
 git checkout main
 ```
+
+## Windows builds (automated, no Mac/PC build needed)
+The Windows installer is built in the cloud by GitHub Actions:
+- Workflow: **`.github/workflows/retrocode-windows.yml`** (Actions tab → "Build RetroCode (Windows x64)" → **Run workflow**).
+- It compiles for Windows x64, builds the Inno Setup **User Setup `.exe`** + a portable `.zip`, and
+  attaches them to the **v1.0.0** release as `RetroCode-1.0.0-windows-x64-Setup.exe` / `.zip`.
+- Currently **unsigned**: users see a one-time "Windows protected your PC" SmartScreen prompt
+  (More info → Run anyway). To remove it, add an EV code-signing certificate and a signing step.
+- To cut a new Windows version, bump the filenames/tag in the workflow and re-run it.
