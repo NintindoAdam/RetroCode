@@ -56,7 +56,11 @@
   .hero .tag{font-size:18px;color:#2b3a4d;margin:0 0 14px;font-weight:700}
   .hero p{margin:0 0 20px;max-width:48ch;color:#33414f}
 
-  .cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .cta{display:flex;flex-direction:column;align-items:stretch;gap:10px}
+  .dl{display:flex;gap:14px;align-items:stretch;flex-wrap:wrap}
+  .dl .btn{flex:1 1 240px}
+  .dlnote{margin:0;font-size:12px;color:#33414f}
+  .cta .ghost{align-self:flex-start}
   .btn{
     appearance:none;cursor:pointer;text-decoration:none;display:inline-flex;flex-direction:column;
     align-items:center;line-height:1.15;padding:11px 26px;border-radius:7px;font-family:var(--font);
@@ -202,14 +206,17 @@
                VSCodium with the classic XP blue chrome, glossy tabs, and Tahoma type baked right
                in. No extensions, no settings to tweak. Open it and you’re home.</p>
             <div class="cta">
-              <a class="btn" href="https://github.com/NintindoAdam/RetroCode/releases/latest/download/RetroCode-1.0.0-arm64.dmg">
-                Download for Mac
-                <small>macOS · Apple Silicon · signed &amp; notarized · 223&nbsp;MB</small>
-              </a>
-              <a class="btn win" href="https://github.com/NintindoAdam/RetroCode/releases/latest/download/RetroCode-1.0.0-windows-x64-Setup.exe">
-                Download for Windows
-                <small>Windows 10/11 · x64 · one-time SmartScreen prompt · 137&nbsp;MB</small>
-              </a>
+              <div class="dl">
+                <a class="btn" href="https://github.com/NintindoAdam/RetroCode/releases/latest/download/RetroCode-1.0.0-arm64.dmg">
+                  Download for Mac
+                  <small>macOS · Apple Silicon · 223&nbsp;MB</small>
+                </a>
+                <a class="btn win" href="https://github.com/NintindoAdam/RetroCode/releases/latest/download/RetroCode-1.0.0-windows-x64-Setup.exe">
+                  Download for Windows
+                  <small>Windows 10/11 · x64 · 137&nbsp;MB</small>
+                </a>
+              </div>
+              <p class="dlnote">Mac build is signed &amp; notarized. Windows is unsigned (one-time SmartScreen prompt).</p>
               <a class="ghost" href="https://github.com/NintindoAdam/RetroCode">View source on GitHub →</a>
             </div>
           </div>
